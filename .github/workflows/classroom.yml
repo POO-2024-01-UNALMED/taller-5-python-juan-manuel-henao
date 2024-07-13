@@ -1,6 +1,5 @@
 name: Autograding Tests
 'on':
-- push
 - workflow_dispatch
 - repository_dispatch
 permissions:
@@ -16,33 +15,27 @@ jobs:
       uses: actions/checkout@v4
     - name: Test Constructores
       id: test-constructores
-      uses: education/autograding-command-grader@v1
+      uses: classroom-resources/autograding-python-grader@v1
       with:
-        test-name: Test Constructores
-        setup-command: sudo -H pip3 install pytest
-        command: pytest testConstructores.py
         timeout: 10
         max-score: 17
+        setup-command: sudo -H pip3 install pytest
     - name: Test Cantidades
       id: test-cantidades
-      uses: education/autograding-command-grader@v1
+      uses: classroom-resources/autograding-python-grader@v1
       with:
-        test-name: Test Cantidades
-        setup-command: sudo -H pip3 install pytest
-        command: pytest testCantidades.py
         timeout: 10
         max-score: 17
+        setup-command: sudo -H pip3 install pytest
     - name: Test Retornos
       id: test-retornos
-      uses: education/autograding-command-grader@v1
+      uses: classroom-resources/autograding-python-grader@v1
       with:
-        test-name: Test Retornos
-        setup-command: sudo -H pip3 install pytest
-        command: pytest testRetornos.py
         timeout: 10
         max-score: 16
+        setup-command: sudo -H pip3 install pytest
     - name: Autograding Reporter
-      uses: education/autograding-grading-reporter@v1
+      uses: classroom-resources/autograding-grading-reporter@v1
       env:
         TEST-CONSTRUCTORES_RESULTS: "${{steps.test-constructores.outputs.result}}"
         TEST-CANTIDADES_RESULTS: "${{steps.test-cantidades.outputs.result}}"
